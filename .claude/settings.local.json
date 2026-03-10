@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install -D @playwright/test)",
+      "Bash(npx playwright install chromium)",
+      "Bash(npx playwright test tests/api --project=api)",
+      "WebFetch(domain:badtz-ui.com)",
+      "WebFetch(domain:optics.agusmayol.com.ar)",
+      "WebFetch(domain:uselayouts.com)",
+      "WebFetch(domain:aliimam.in)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm install motion)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --no-git)",
+      "Bash(npm install)",
+      "Bash(npm install clsx tailwind-merge)",
+      "Bash(npm run build)"
+    ]
+  }
+}

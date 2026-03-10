@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX Design Directions — The Brilliance Corner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-ui: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-ui);
+    background: #0d0d0d;
+    color: #f5f0e8;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVIGATION ─── */
+  .page-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #0d0d0d;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .page-nav-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5a5755;
+    margin-right: 1rem;
+  }
+  .nav-btn {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 0.4rem 1rem;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    color: #9a9690;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 4px;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    border-color: #C9A84C;
+    color: #C9A84C;
+  }
+
+  /* ─── DIRECTION PANELS ─── */
+  .direction {
+    display: none;
+  }
+  .direction.visible {
+    display: block;
+  }
+
+  /* ─── DIRECTION LABEL ─── */
+  .dir-label {
+    background: #111;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+  .dir-number {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #5a5755;
+  }
+  .dir-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f5f0e8;
+  }
+  .dir-desc {
+    font-size: 0.8rem;
+    color: #9a9690;
+  }
+
+  /* ─── FULL SITE MOCKUP ─── */
+  .mockup {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* ─── SHARED NAV ─── */
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem;
+    position: relative;
+    z-index: 10;
+  }
+  .site-logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .site-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+  }
+  .site-links a {
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 5rem 2.5rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.75rem;
+    max-width: 16ch;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.7;
+    max-width: 52ch;
+    margin-bottom: 2.75rem;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .btn-primary {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.85rem 2rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    border-radius: 3px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-ghost {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 0.85rem 2rem;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.25s;
+    border-radius: 3px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  /* ─── SERVICES PREVIEW ─── */
+  .services-strip {
+    padding: 3rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    padding: 1.75rem;
+    border-radius: 6px;
+  }
+  .service-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .service-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .service-desc {
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  /* ─── BLOG PREVIEW ─── */
+  .blog-strip {
+    padding: 3rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .blog-card {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .blog-img {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .blog-body {
+    padding: 1.25rem;
+  }
+  .blog-meta {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .blog-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  /* ─── FOOTER ─── */
+  .site-footer {
+    padding: 3rem 2.5rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    border-top: 1px solid;
+  }
+
+  /* ════════════════════════════════════════════
+     DIRECTION 1: EDITORIAL DARK GOLD (PRIMARY)
+  ════════════════════════════════════════════ */
+  .d1 { background: #0A0A0A; }
+
+  .d1 .site-nav { border-bottom: 1px solid #1e1e1e; }
+  .d1 .site-logo { color: #F5F0E8; }
+  .d1 .site-links a { color: #9A9690; }
+  .d1 .site-links a:hover { color: #F5F0E8; }
+  .d1 .site-cta { background: #C9A84C; color: #0A0A0A; }
+
+  .d1 .hero-eyebrow { color: #C9A84C; }
+  .d1 .hero-eyebrow::before { background: #C9A84C; }
+  .d1 .hero-headline { color: #F5F0E8; }
+  .d1 .hero-sub { color: #9A9690; }
+
+  .d1 .btn-primary { background: #C9A84C; color: #0A0A0A; }
+  .d1 .btn-primary:hover { background: #DEC06A; }
+  .d1 .btn-ghost { color: #9A9690; border: 1px solid #2A2A2A; }
+  .d1 .btn-ghost:hover { color: #F5F0E8; border-color: #5a5755; }
+
+  .d1 .service-card { background: #111111; border: 1px solid #1e1e1e; }
+  .d1 .service-card:hover { border-color: #C9A84C44; }
+  .d1 .service-icon { background: #C9A84C1A; color: #C9A84C; }
+  .d1 .service-title { color: #F5F0E8; }
+  .d1 .service-desc { color: #9A9690; }
+
+  .d1 .section-label { color: #C9A84C; }
+  .d1 .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: #C9A84C; }
+  .d1 .blog-card { background: #111111; border: 1px solid #1e1e1e; }
+  .d1 .blog-img { background: #1a1a1a; color: #5a5755; }
+  .d1 .blog-meta { color: #5A5755; }
+  .d1 .blog-title { color: #F5F0E8; }
+
+  .d1 .site-footer { border-color: #1e1e1e; color: #5A5755; }
+
+  /* ════════════════════════════════════════════
+     DIRECTION 2: NOIR WITH IVORY
+  ════════════════════════════════════════════ */
+  .d2 { background: #080808; }
+
+  .d2 .site-nav { border-bottom: 1px solid #1a1a1a; }
+  .d2 .site-logo { color: #EDE8DC; font-style: italic; }
+  .d2 .site-links a { color: #7a7672; }
+  .d2 .site-links a:hover { color: #EDE8DC; }
+  .d2 .site-cta { background: transparent; color: #EDE8DC; border: 1px solid #3a3832; }
+
+  .d2 .hero-eyebrow { color: #7a7672; }
+  .d2 .hero-eyebrow::before { background: #3a3832; }
+  .d2 .hero-headline { color: #EDE8DC; }
+  .d2 .hero-headline em { font-style: italic; color: #BDB5A0; }
+  .d2 .hero-sub { color: #7a7672; }
+
+  .d2 .btn-primary { background: #EDE8DC; color: #080808; border-radius: 0; }
+  .d2 .btn-primary:hover { background: #fff; }
+  .d2 .btn-ghost { color: #7a7672; border: 1px solid #2a2820; border-radius: 0; }
+
+  .d2 .service-card { background: #0e0e0e; border: 1px solid #1a1a1a; border-radius: 0; }
+  .d2 .service-icon { background: transparent; color: #BDB5A0; border: 1px solid #2a2820; border-radius: 0; }
+  .d2 .service-title { color: #EDE8DC; }
+  .d2 .service-desc { color: #7a7672; }
+
+  .d2 .section-label { color: #7a7672; }
+  .d2 .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: #3a3832; }
+  .d2 .blog-card { background: #0e0e0e; border: 1px solid #1a1a1a; border-radius: 0; }
+  .d2 .blog-img { background: #141410; color: #3a3832; }
+  .d2 .blog-meta { color: #4a4842; }
+  .d2 .blog-title { color: #EDE8DC; }
+
+  .d2 .site-footer { border-color: #1a1a1a; color: #4a4842; }
+
+  /* ════════════════════════════════════════════
+     DIRECTION 3: DEEP NAVY + GOLD
+  ════════════════════════════════════════════ */
+  .d3 { background: #08101A; }
+
+  .d3 .site-nav { border-bottom: 1px solid #0F1E30; }
+  .d3 .site-logo { color: #E8EFF8; }
+  .d3 .site-links a { color: #7A90A8; }
+  .d3 .site-links a:hover { color: #E8EFF8; }
+  .d3 .site-cta { background: #C9A84C; color: #08101A; }
+
+  .d3 .hero-eyebrow { color: #C9A84C; }
+  .d3 .hero-eyebrow::before { background: #C9A84C; }
+  .d3 .hero-headline { color: #E8EFF8; }
+  .d3 .hero-sub { color: #7A90A8; }
+
+  .d3 .btn-primary { background: #C9A84C; color: #08101A; }
+  .d3 .btn-primary:hover { background: #DEC06A; }
+  .d3 .btn-ghost { color: #7A90A8; border: 1px solid #0F2030; }
+
+  .d3 .service-card { background: #0D1A28; border: 1px solid #0F2030; }
+  .d3 .service-icon { background: #C9A84C1A; color: #C9A84C; }
+  .d3 .service-title { color: #E8EFF8; }
+  .d3 .service-desc { color: #7A90A8; }
+
+  .d3 .section-label { color: #C9A84C; }
+  .d3 .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: #C9A84C; }
+  .d3 .blog-card { background: #0D1A28; border: 1px solid #0F2030; }
+  .d3 .blog-img { background: #0A1520; color: #1a3050; }
+  .d3 .blog-meta { color: #4A6080; }
+  .d3 .blog-title { color: #E8EFF8; }
+
+  .d3 .site-footer { border-color: #0F1E30; color: #4A6080; }
+
+  /* ════════════════════════════════════════════
+     DIRECTION 4: HIGH CONTRAST MINIMAL
+  ════════════════════════════════════════════ */
+  .d4 { background: #000000; }
+
+  .d4 .site-nav { border-bottom: 1px solid #111; }
+  .d4 .site-logo { color: #FFFFFF; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; font-family: var(--font-ui); font-weight: 600; }
+  .d4 .site-links a { color: #666; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .d4 .site-links a:hover { color: #fff; }
+  .d4 .site-cta { background: #fff; color: #000; border-radius: 0; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .d4 .hero { padding: 7rem 2.5rem 6rem; }
+  .d4 .hero-eyebrow { color: #444; font-size: 0.68rem; }
+  .d4 .hero-eyebrow::before { background: #333; }
+  .d4 .hero-headline { color: #FFFFFF; font-size: clamp(3rem, 6vw, 7rem); max-width: 14ch; }
+  .d4 .hero-sub { color: #666; }
+
+  .d4 .btn-primary { background: #fff; color: #000; border-radius: 0; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .d4 .btn-primary:hover { background: #e8e8e8; }
+  .d4 .btn-ghost { color: #444; border: 1px solid #222; border-radius: 0; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .d4 .service-card { background: #0a0a0a; border: 1px solid #111; border-radius: 0; }
+  .d4 .service-icon { background: transparent; color: #fff; border: 1px solid #222; border-radius: 0; }
+  .d4 .service-title { color: #fff; font-family: var(--font-ui); font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .d4 .service-desc { color: #555; }
+
+  .d4 .section-label { color: #333; }
+  .d4 .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: #222; }
+  .d4 .blog-card { background: #0a0a0a; border: 1px solid #111; border-radius: 0; }
+  .d4 .blog-img { background: #0f0f0f; color: #1e1e1e; }
+  .d4 .blog-meta { color: #333; }
+  .d4 .blog-title { color: #fff; font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em; }
+
+  .d4 .site-footer { border-color: #111; color: #333; }
+
+  /* ════════════════════════════════════════════
+     DIRECTION 5: DARK WARM TEXTURE
+  ════════════════════════════════════════════ */
+  .d5 { background: #0C0B09; }
+  .d5-texture {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .d5 .site-nav { border-bottom: 1px solid #221F1A; position: relative; z-index: 5; }
+  .d5 .site-logo { color: #F0EAD6; }
+  .d5 .site-links a { color: #8C8578; }
+  .d5 .site-links a:hover { color: #F0EAD6; }
+  .d5 .site-cta { background: #C9A84C; color: #0C0B09; }
+
+  .d5 .hero { position: relative; z-index: 5; }
+  .d5 .hero-eyebrow { color: #C9A84C; }
+  .d5 .hero-eyebrow::before { background: #C9A84C; }
+  .d5 .hero-headline { color: #F0EAD6; }
+  .d5 .hero-sub { color: #8C8578; }
+
+  .d5 .btn-primary { background: #C9A84C; color: #0C0B09; }
+  .d5 .btn-primary:hover { background: #DEC06A; }
+  .d5 .btn-ghost { color: #8C8578; border: 1px solid #2a2620; }
+
+  .d5 .services-strip, .d5 .blog-strip { position: relative; z-index: 5; }
+  .d5 .service-card { background: #141210; border: 1px solid #221F1A; }
+  .d5 .service-icon { background: #C9A84C15; color: #C9A84C; }
+  .d5 .service-title { color: #F0EAD6; }
+  .d5 .service-desc { color: #8C8578; }
+
+  .d5 .section-label { color: #C9A84C; position: relative; z-index: 5; }
+  .d5 .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: #C9A84C; }
+  .d5 .blog-card { background: #141210; border: 1px solid #221F1A; }
+  .d5 .blog-img { background: #1a1714; color: #2a2520; }
+  .d5 .blog-meta { color: #4a4540; }
+  .d5 .blog-title { color: #F0EAD6; }
+
+  .d5 .site-footer { border-color: #221F1A; color: #4a4540; position: relative; z-index: 5; }
+
+  /* ════════════════════════════════════════════
+     DIRECTION 6: ALTERNATING DEPTH
+  ════════════════════════════════════════════ */
+  .d6 { background: #0A0A0A; }
+
+  .d6 .site-nav { border-bottom: 1px solid #1e1e1e; }
+  .d6 .site-logo { color: #F5F0E8; }
+  .d6 .site-links a { color: #9A9690; }
+  .d6 .site-links a:hover { color: #F5F0E8; }
+  .d6 .site-cta { background: transparent; border: 1px solid #C9A84C; color: #C9A84C; }
+
+  .d6 .hero { background: linear-gradient(160deg, #0A0A0A 0%, #111009 100%); }
+  .d6 .hero-eyebrow { color: #C9A84C; }
+  .d6 .hero-eyebrow::before { background: #C9A84C; }
+  .d6 .hero-headline { color: #F5F0E8; }
+  .d6 .hero-sub { color: #9A9690; }
+
+  .d6 .btn-primary { background: transparent; color: #C9A84C; border: 1.5px solid #C9A84C; }
+  .d6 .btn-primary:hover { background: #C9A84C; color: #0A0A0A; }
+  .d6 .btn-ghost { color: #9A9690; border: 1px solid #2A2A2A; }
+
+  .d6 .services-strip { background: #0f0f0f; padding-top: 4rem; padding-bottom: 4rem; max-width: 100%; }
+  .d6 .services-strip-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .d6 .service-card { background: #0A0A0A; border: 1px solid #1e1e1e; }
+  .d6 .service-icon { background: #C9A84C12; color: #C9A84C; }
+  .d6 .service-title { color: #F5F0E8; }
+  .d6 .service-desc { color: #9A9690; }
+
+  .d6 .blog-strip { background: #0A0A0A; }
+  .d6 .section-label { color: #C9A84C; }
+  .d6 .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: #C9A84C; }
+  .d6 .blog-card { background: #111111; border: 1px solid #1e1e1e; }
+  .d6 .blog-img { background: #1a1a1a; color: #2a2a2a; }
+  .d6 .blog-meta { color: #5A5755; }
+  .d6 .blog-title { color: #F5F0E8; }
+
+  .d6 .site-footer { border-color: #1e1e1e; color: #5A5755; background: #0f0f0f; }
+
+  /* ─── RECOMMENDATION BADGE ─── */
+  .recommended-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #C9A84C;
+    color: #0A0A0A;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 600;
+    margin-left: 0.75rem;
+    vertical-align: middle;
+  }
+
+  /* ─── SUMMARY PANEL ─── */
+  .summary {
+    background: #111;
+    border-top: 1px solid #1e1e1e;
+    padding: 3rem 2.5rem;
+  }
+  .summary h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: #F5F0E8;
+    margin-bottom: 1rem;
+  }
+  .summary p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #9a9690;
+    max-width: 70ch;
+    margin-bottom: 0.75rem;
+  }
+  .summary table {
+    width: 100%;
+    max-width: 900px;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+  }
+  .summary th {
+    text-align: left;
+    color: #5a5755;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem 0.5rem 0;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .summary td {
+    padding: 0.7rem 1rem 0.7rem 0;
+    border-bottom: 1px solid #151515;
+    color: #9a9690;
+    vertical-align: top;
+  }
+  .summary td:first-child { color: #F5F0E8; font-weight: 500; }
+  .summary .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .tag-primary { background: #C9A84C22; color: #C9A84C; border: 1px solid #C9A84C44; }
+  .tag-neutral { background: #2a2a2a; color: #9a9690; }
+
+  @media (max-width: 640px) {
+    .services-strip, .blog-grid { grid-template-columns: 1fr; }
+    .site-links { display: none; }
+    .hero-headline { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────── TOP NAV ─────────── -->
+<nav class="page-nav">
+  <span class="page-nav-label">Design Directions</span>
+  <button class="nav-btn active" onclick="show(1, this)">1 · Editorial Dark Gold</button>
+  <button class="nav-btn" onclick="show(2, this)">2 · Noir Ivory</button>
+  <button class="nav-btn" onclick="show(3, this)">3 · Deep Navy Gold</button>
+  <button class="nav-btn" onclick="show(4, this)">4 · High Contrast</button>
+  <button class="nav-btn" onclick="show(5, this)">5 · Dark Warm Texture</button>
+  <button class="nav-btn" onclick="show(6, this)">6 · Alternating Depth</button>
+  <button class="nav-btn" onclick="show(7, this)">Overview</button>
+</nav>
+
+<!-- ══════════════════════════════════
+     DIRECTION 1: EDITORIAL DARK GOLD
+══════════════════════════════════ -->
+<section class="direction visible" id="dir-1">
+  <div class="dir-label">
+    <span class="dir-number">Direction 01</span>
+    <span class="dir-name">Editorial Dark Gold <span class="recommended-badge">Recommended</span></span>
+    <span class="dir-desc">Near-black · Playfair + Inter · Warm gold accent · Aggressive whitespace</span>
+  </div>
+  <div class="mockup d1">
+    <nav class="site-nav">
+      <div class="site-logo">The Brilliance Corner</div>
+      <ul class="site-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="btn-primary site-cta" style="padding: 0.55rem 1.4rem; font-size: 0.8rem;">Get in Touch</button>
+    </nav>
+    <div class="hero">
+      <div class="hero-eyebrow">Premium Digital Agency</div>
+      <h1 class="hero-headline">We turn your brand into a dominant force.</h1>
+      <p class="hero-sub">Copywriting, social media, and SEO that doesn't just look premium — it performs. Built for businesses that refuse to be second.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Get in Touch</a>
+        <a href="#" class="btn-ghost">Read Our Work</a>
+      </div>
+    </div>
+    <div class="services-strip">
+      <div class="service-card">
+        <div class="service-icon">✦</div>
+        <div class="service-title">Copywriting</div>
+        <div class="service-desc">Words that convert. Every headline, page, and email crafted to compel action from your ideal client.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <div class="service-title">Social Media</div>
+        <div class="service-desc">Consistent, brand-aligned content that builds a loyal audience and turns followers into buyers.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⬡</div>
+        <div class="service-title">SEO &amp; Backlinks</div>
+        <div class="service-desc">Rank for the terms that matter. Authority-building SEO that compounds month over month.</div>
+      </div>
+    </div>
+    <div class="blog-strip">
+      <div class="section-label">From the Blog</div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">March 2026 · 6 min read</div>
+            <div class="blog-title">Why Most Agency SEO Fails in 90 Days</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 8 min read</div>
+            <div class="blog-title">The Copy Formula That Converts SaaS Trials</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 5 min read</div>
+            <div class="blog-title">Social Media Strategy for Luxury Brands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <span>© 2026 The Brilliance Corner</span>
+      <span>hello@thebrilliancecorner.com</span>
+    </footer>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     DIRECTION 2: NOIR IVORY
+══════════════════════════════ -->
+<section class="direction" id="dir-2">
+  <div class="dir-label">
+    <span class="dir-number">Direction 02</span>
+    <span class="dir-name">Noir Ivory</span>
+    <span class="dir-desc">Pure black · Italic Playfair · Ivory/cream palette · Zero-radius sharp corners</span>
+  </div>
+  <div class="mockup d2">
+    <nav class="site-nav">
+      <div class="site-logo">The Brilliance Corner</div>
+      <ul class="site-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="btn-ghost site-cta" style="padding: 0.55rem 1.4rem; font-size: 0.8rem;">Get in Touch</button>
+    </nav>
+    <div class="hero">
+      <div class="hero-eyebrow">Premium Digital Agency</div>
+      <h1 class="hero-headline">We turn your brand into a dominant force.</h1>
+      <p class="hero-sub">Copywriting, social media, and SEO that doesn't just look premium — it performs. Built for businesses that refuse to be second.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Get in Touch</a>
+        <a href="#" class="btn-ghost">Read Our Work</a>
+      </div>
+    </div>
+    <div class="services-strip">
+      <div class="service-card">
+        <div class="service-icon">I</div>
+        <div class="service-title">Copywriting</div>
+        <div class="service-desc">Words that convert. Every headline, page, and email crafted to compel action from your ideal client.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">II</div>
+        <div class="service-title">Social Media</div>
+        <div class="service-desc">Consistent, brand-aligned content that builds a loyal audience and turns followers into buyers.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">III</div>
+        <div class="service-title">SEO &amp; Backlinks</div>
+        <div class="service-desc">Rank for the terms that matter. Authority-building SEO that compounds month over month.</div>
+      </div>
+    </div>
+    <div class="blog-strip">
+      <div class="section-label">From the Blog</div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">March 2026 · 6 min read</div>
+            <div class="blog-title">Why Most Agency SEO Fails in 90 Days</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 8 min read</div>
+            <div class="blog-title">The Copy Formula That Converts SaaS Trials</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 5 min read</div>
+            <div class="blog-title">Social Media Strategy for Luxury Brands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <span>© 2026 The Brilliance Corner</span>
+      <span>hello@thebrilliancecorner.com</span>
+    </footer>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     DIRECTION 3: DEEP NAVY GOLD
+══════════════════════════════ -->
+<section class="direction" id="dir-3">
+  <div class="dir-label">
+    <span class="dir-number">Direction 03</span>
+    <span class="dir-name">Deep Navy Gold</span>
+    <span class="dir-desc">Deep navy background · Gold accent · Slightly warmer, more approachable premium</span>
+  </div>
+  <div class="mockup d3">
+    <nav class="site-nav">
+      <div class="site-logo">The Brilliance Corner</div>
+      <ul class="site-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="btn-primary site-cta" style="padding: 0.55rem 1.4rem; font-size: 0.8rem;">Get in Touch</button>
+    </nav>
+    <div class="hero">
+      <div class="hero-eyebrow">Premium Digital Agency</div>
+      <h1 class="hero-headline">We turn your brand into a dominant force.</h1>
+      <p class="hero-sub">Copywriting, social media, and SEO that doesn't just look premium — it performs. Built for businesses that refuse to be second.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Get in Touch</a>
+        <a href="#" class="btn-ghost">Read Our Work</a>
+      </div>
+    </div>
+    <div class="services-strip">
+      <div class="service-card">
+        <div class="service-icon">✦</div>
+        <div class="service-title">Copywriting</div>
+        <div class="service-desc">Words that convert. Every headline, page, and email crafted to compel action from your ideal client.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <div class="service-title">Social Media</div>
+        <div class="service-desc">Consistent, brand-aligned content that builds a loyal audience and turns followers into buyers.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⬡</div>
+        <div class="service-title">SEO &amp; Backlinks</div>
+        <div class="service-desc">Rank for the terms that matter. Authority-building SEO that compounds month over month.</div>
+      </div>
+    </div>
+    <div class="blog-strip">
+      <div class="section-label">From the Blog</div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">March 2026 · 6 min read</div>
+            <div class="blog-title">Why Most Agency SEO Fails in 90 Days</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 8 min read</div>
+            <div class="blog-title">The Copy Formula That Converts SaaS Trials</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 5 min read</div>
+            <div class="blog-title">Social Media Strategy for Luxury Brands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <span>© 2026 The Brilliance Corner</span>
+      <span>hello@thebrilliancecorner.com</span>
+    </footer>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     DIRECTION 4: HIGH CONTRAST
+══════════════════════════════ -->
+<section class="direction" id="dir-4">
+  <div class="dir-label">
+    <span class="dir-number">Direction 04</span>
+    <span class="dir-name">High Contrast Minimal</span>
+    <span class="dir-desc">Pure black · White only (no colour accent) · Uppercase UI type · Maximum stark impact</span>
+  </div>
+  <div class="mockup d4">
+    <nav class="site-nav">
+      <div class="site-logo">THE BRILLIANCE CORNER</div>
+      <ul class="site-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="btn-primary site-cta" style="padding: 0.55rem 1.4rem;">Get in Touch</button>
+    </nav>
+    <div class="hero">
+      <div class="hero-eyebrow">Premium Digital Agency</div>
+      <h1 class="hero-headline">We turn your brand into a dominant force.</h1>
+      <p class="hero-sub">Copywriting, social media, and SEO that doesn't just look premium — it performs. Built for businesses that refuse to be second.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Get in Touch</a>
+        <a href="#" class="btn-ghost">Read Our Work</a>
+      </div>
+    </div>
+    <div class="services-strip">
+      <div class="service-card">
+        <div class="service-icon">01</div>
+        <div class="service-title">Copywriting</div>
+        <div class="service-desc">Words that convert. Every headline, page, and email crafted to compel action from your ideal client.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">02</div>
+        <div class="service-title">Social Media</div>
+        <div class="service-desc">Consistent, brand-aligned content that builds a loyal audience and turns followers into buyers.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">03</div>
+        <div class="service-title">SEO &amp; Backlinks</div>
+        <div class="service-desc">Rank for the terms that matter. Authority-building SEO that compounds month over month.</div>
+      </div>
+    </div>
+    <div class="blog-strip">
+      <div class="section-label">From the Blog</div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">March 2026 · 6 min read</div>
+            <div class="blog-title">Why Most Agency SEO Fails in 90 Days</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 8 min read</div>
+            <div class="blog-title">The Copy Formula That Converts SaaS Trials</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 5 min read</div>
+            <div class="blog-title">Social Media Strategy for Luxury Brands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <span>© 2026 The Brilliance Corner</span>
+      <span>hello@thebrilliancecorner.com</span>
+    </footer>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     DIRECTION 5: DARK WARM TEXTURE
+══════════════════════════════ -->
+<section class="direction" id="dir-5">
+  <div class="dir-label">
+    <span class="dir-number">Direction 05</span>
+    <span class="dir-name">Dark Warm Texture</span>
+    <span class="dir-desc">Near-black with subtle noise · Warm gold · Slightly organic, tactile feel</span>
+  </div>
+  <div class="mockup d5" style="position: relative;">
+    <div class="d5-texture"></div>
+    <nav class="site-nav">
+      <div class="site-logo">The Brilliance Corner</div>
+      <ul class="site-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="btn-primary site-cta" style="padding: 0.55rem 1.4rem; font-size: 0.8rem;">Get in Touch</button>
+    </nav>
+    <div class="hero">
+      <div class="hero-eyebrow">Premium Digital Agency</div>
+      <h1 class="hero-headline">We turn your brand into a dominant force.</h1>
+      <p class="hero-sub">Copywriting, social media, and SEO that doesn't just look premium — it performs. Built for businesses that refuse to be second.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Get in Touch</a>
+        <a href="#" class="btn-ghost">Read Our Work</a>
+      </div>
+    </div>
+    <div class="services-strip">
+      <div class="service-card">
+        <div class="service-icon">✦</div>
+        <div class="service-title">Copywriting</div>
+        <div class="service-desc">Words that convert. Every headline, page, and email crafted to compel action from your ideal client.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <div class="service-title">Social Media</div>
+        <div class="service-desc">Consistent, brand-aligned content that builds a loyal audience and turns followers into buyers.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⬡</div>
+        <div class="service-title">SEO &amp; Backlinks</div>
+        <div class="service-desc">Rank for the terms that matter. Authority-building SEO that compounds month over month.</div>
+      </div>
+    </div>
+    <div class="blog-strip">
+      <div class="section-label">From the Blog</div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">March 2026 · 6 min read</div>
+            <div class="blog-title">Why Most Agency SEO Fails in 90 Days</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 8 min read</div>
+            <div class="blog-title">The Copy Formula That Converts SaaS Trials</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 5 min read</div>
+            <div class="blog-title">Social Media Strategy for Luxury Brands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <span>© 2026 The Brilliance Corner</span>
+      <span>hello@thebrilliancecorner.com</span>
+    </footer>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     DIRECTION 6: ALTERNATING DEPTH
+══════════════════════════════ -->
+<section class="direction" id="dir-6">
+  <div class="dir-label">
+    <span class="dir-number">Direction 06</span>
+    <span class="dir-name">Alternating Depth</span>
+    <span class="dir-desc">Hero #0A0A0A · Services on #0f0f0f · Outlined gold CTAs · Section rhythm via background</span>
+  </div>
+  <div class="mockup d6">
+    <nav class="site-nav">
+      <div class="site-logo">The Brilliance Corner</div>
+      <ul class="site-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="site-cta" style="padding: 0.55rem 1.4rem; font-size: 0.8rem; background: transparent; border: 1px solid #C9A84C; color: #C9A84C; font-family: var(--font-ui); cursor: pointer; border-radius: 3px;">Get in Touch</button>
+    </nav>
+    <div class="hero">
+      <div class="hero-eyebrow">Premium Digital Agency</div>
+      <h1 class="hero-headline">We turn your brand into a dominant force.</h1>
+      <p class="hero-sub">Copywriting, social media, and SEO that doesn't just look premium — it performs. Built for businesses that refuse to be second.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Get in Touch</a>
+        <a href="#" class="btn-ghost">Read Our Work</a>
+      </div>
+    </div>
+    <div style="background: #0f0f0f; padding: 4rem 0;">
+      <div style="max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;">
+        <div class="service-card">
+          <div class="service-icon">✦</div>
+          <div class="service-title">Copywriting</div>
+          <div class="service-desc">Words that convert. Every headline, page, and email crafted to compel action from your ideal client.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">◈</div>
+          <div class="service-title">Social Media</div>
+          <div class="service-desc">Consistent, brand-aligned content that builds a loyal audience and turns followers into buyers.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⬡</div>
+          <div class="service-title">SEO &amp; Backlinks</div>
+          <div class="service-desc">Rank for the terms that matter. Authority-building SEO that compounds month over month.</div>
+        </div>
+      </div>
+    </div>
+    <div class="blog-strip">
+      <div class="section-label">From the Blog</div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">March 2026 · 6 min read</div>
+            <div class="blog-title">Why Most Agency SEO Fails in 90 Days</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 8 min read</div>
+            <div class="blog-title">The Copy Formula That Converts SaaS Trials</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-img">Cover Image</div>
+          <div class="blog-body">
+            <div class="blog-meta">February 2026 · 5 min read</div>
+            <div class="blog-title">Social Media Strategy for Luxury Brands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <span>© 2026 The Brilliance Corner</span>
+      <span>hello@thebrilliancecorner.com</span>
+    </footer>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     OVERVIEW / SUMMARY
+══════════════════════════════ -->
+<section class="direction" id="dir-7">
+  <div class="dir-label">
+    <span class="dir-number">Overview</span>
+    <span class="dir-name">Design Directions Summary</span>
+    <span class="dir-desc">Compare all six directions at a glance</span>
+  </div>
+  <div class="summary">
+    <h2>Design Direction Analysis</h2>
+    <p>Six directions have been generated, all sharing the same typographic system (Playfair Display + Inter), component structure, and layout approach. The primary variable is the colour treatment and accent strategy.</p>
+    <p>My recommendation is <strong style="color: #C9A84C;">Direction 1: Editorial Dark Gold</strong> — it most precisely executes the brand brief (luxurious, minimal, sharp, confident) while maintaining the warmth needed to attract agency clients vs. the cold tech-company read of pure black/white.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Direction</th>
+          <th>Palette</th>
+          <th>Accent</th>
+          <th>Brand Signal</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1 · Editorial Dark Gold</td>
+          <td>#0A0A0A · warm white</td>
+          <td>Gold #C9A84C</td>
+          <td>Luxury editorial agency</td>
+          <td><span class="tag tag-primary">Recommended</span></td>
+        </tr>
+        <tr>
+          <td>2 · Noir Ivory</td>
+          <td>#080808 · ivory</td>
+          <td>None</td>
+          <td>Fashion editorial, minimal</td>
+          <td><span class="tag tag-neutral">Alternative</span></td>
+        </tr>
+        <tr>
+          <td>3 · Deep Navy Gold</td>
+          <td>#08101A · blue-white</td>
+          <td>Gold #C9A84C</td>
+          <td>Prestige finance / consulting</td>
+          <td><span class="tag tag-neutral">Alternative</span></td>
+        </tr>
+        <tr>
+          <td>4 · High Contrast</td>
+          <td>#000000 · white</td>
+          <td>None</td>
+          <td>Tech-forward, stark modernism</td>
+          <td><span class="tag tag-neutral">Too cold</span></td>
+        </tr>
+        <tr>
+          <td>5 · Dark Warm Texture</td>
+          <td>#0C0B09 · warm white</td>
+          <td>Gold #C9A84C</td>
+          <td>Artisanal luxury, tactile</td>
+          <td><span class="tag tag-neutral">Alternative</span></td>
+        </tr>
+        <tr>
+          <td>6 · Alternating Depth</td>
+          <td>#0A0A0A · #0f0f0f</td>
+          <td>Outlined gold</td>
+          <td>Structured, rhythmic premium</td>
+          <td><span class="tag tag-neutral">Alternative</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+  function show(n, btn) {
+    document.querySelectorAll('.direction').forEach(d => d.classList.remove('visible'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('dir-' + n).classList.add('visible');
+    btn.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Prevent horizontal overflow on mobile */
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-bg text-text-primary font-ui antialiased;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Ensure all images are responsive by default */
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Minimum tap target size for all interactive elements */
+  button, a, input, textarea, select, [role="button"] {
+    min-height: 44px;
+  }
+
+  /* Exception for inline links within prose */
+  .prose a {
+    min-height: unset;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-text-primary;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bg;
+  }
+
+  /* Skip link */
+  .sr-only:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[9999] bg-accent text-bg px-4 py-2 text-sm font-medium;
+    min-height: auto;
+  }
+}
+
+@layer components {
+  /* Gold decorative line used in section headers */
+  .gold-line {
+    @apply h-px bg-gradient-to-r from-accent via-accent/50 to-transparent;
+  }
+
+  /* Overline label above headings */
+  .overline {
+    @apply text-label font-ui uppercase tracking-[0.1em] text-accent font-medium;
+  }
+
+  /* Card hover lift */
+  .card-hover {
+    @apply transition-transform duration-300 ease-expo-out hover:-translate-y-1;
+  }
+}
+
+@layer utilities {
+  /* Prose dark overrides already in tailwind.config.ts */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
