@@ -48,7 +48,10 @@ export default function OGImage() {
         {/* Headline */}
         <div
           style={{
-            color: '#F5F0E8',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'baseline',
+            flexWrap: 'wrap',
             fontSize: '72px',
             lineHeight: 1.05,
             letterSpacing: '-0.02em',
@@ -56,9 +59,9 @@ export default function OGImage() {
             maxWidth: '900px',
           }}
         >
-          The{' '}
+          <span style={{ color: '#F5F0E8' }}>The&nbsp;</span>
           <span style={{ color: '#C9A84C' }}>Brilliance</span>
-          {' '}Corner
+          <span style={{ color: '#F5F0E8' }}>&nbsp;Corner</span>
         </div>
         {/* Tagline */}
         <div
