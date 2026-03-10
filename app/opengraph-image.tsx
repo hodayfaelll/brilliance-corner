@@ -9,83 +9,143 @@ export default function OGImage() {
     (
       <div
         style={{
-          background: '#0A0A0A',
-          width: '100%',
-          height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'flex-end',
-          padding: '80px',
-          fontFamily: 'Georgia, serif',
-          position: 'relative',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+          background: '#0A0A0A',
+          padding: '72px 80px',
         }}
       >
-        {/* Gold accent top bar */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '4px',
-            background: 'linear-gradient(90deg, #C9A84C 0%, rgba(201,168,76,0.3) 60%, transparent 100%)',
-          }}
-        />
-        {/* Overline */}
-        <div
-          style={{
-            color: '#C9A84C',
-            fontSize: '16px',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            marginBottom: '20px',
-            fontFamily: 'Georgia, serif',
-          }}
-        >
-          Premium Digital Marketing
-        </div>
-        {/* Headline */}
+        {/* Top accent bar */}
         <div
           style={{
             display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'baseline',
-            flexWrap: 'wrap',
-            fontSize: '72px',
-            lineHeight: 1.05,
-            letterSpacing: '-0.02em',
-            marginBottom: '28px',
-            maxWidth: '900px',
+            width: '120px',
+            height: '3px',
+            background: '#C9A84C',
           }}
-        >
-          <span style={{ color: '#F5F0E8' }}>The&nbsp;</span>
-          <span style={{ color: '#C9A84C' }}>Brilliance</span>
-          <span style={{ color: '#F5F0E8' }}>&nbsp;Corner</span>
-        </div>
-        {/* Tagline */}
+        />
+
+        {/* Main content */}
         <div
           style={{
-            color: '#9A9690',
-            fontSize: '24px',
-            lineHeight: 1.5,
-            maxWidth: '700px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          Compelling copy, social media strategy, and SEO — for founders who refuse to settle for average.
+          {/* Overline */}
+          <div
+            style={{
+              display: 'flex',
+              color: '#C9A84C',
+              fontSize: '15px',
+              fontFamily: 'Georgia, serif',
+              marginBottom: '24px',
+              letterSpacing: '3px',
+            }}
+          >
+            PREMIUM DIGITAL MARKETING
+          </div>
+
+          {/* Headline */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              marginBottom: '28px',
+            }}
+          >
+            <span
+              style={{
+                color: '#F5F0E8',
+                fontSize: '74px',
+                fontFamily: 'Georgia, serif',
+                lineHeight: '1.05',
+              }}
+            >
+              The{' '}
+            </span>
+            <span
+              style={{
+                color: '#C9A84C',
+                fontSize: '74px',
+                fontFamily: 'Georgia, serif',
+                lineHeight: '1.05',
+              }}
+            >
+              Brilliance
+            </span>
+            <span
+              style={{
+                color: '#F5F0E8',
+                fontSize: '74px',
+                fontFamily: 'Georgia, serif',
+                lineHeight: '1.05',
+              }}
+            >
+              {' '}Corner
+            </span>
+          </div>
+
+          {/* Tagline */}
+          <div
+            style={{
+              display: 'flex',
+              color: '#9A9690',
+              fontSize: '24px',
+              fontFamily: 'Georgia, serif',
+              maxWidth: '680px',
+              lineHeight: '1.5',
+            }}
+          >
+            Compelling copy, SEO, and social media — for founders who refuse to settle for average.
+          </div>
         </div>
-        {/* Domain */}
+
+        {/* Bottom row */}
         <div
           style={{
-            position: 'absolute',
-            bottom: '80px',
-            right: '80px',
-            color: '#5A5755',
-            fontSize: '18px',
-            letterSpacing: '0.05em',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
-          thebrilliancecorner.com
+          <div
+            style={{
+              display: 'flex',
+              color: '#5A5755',
+              fontSize: '17px',
+              fontFamily: 'Georgia, serif',
+              letterSpacing: '1px',
+            }}
+          >
+            thebrilliancecorner.com
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              width: '40px',
+              height: '40px',
+              background: '#C9A84C',
+              borderRadius: '50%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <span
+              style={{
+                color: '#0A0A0A',
+                fontSize: '18px',
+                fontFamily: 'Georgia, serif',
+                fontWeight: 'bold',
+              }}
+            >
+              B
+            </span>
+          </div>
         </div>
       </div>
     ),
